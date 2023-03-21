@@ -4,7 +4,7 @@ import { ListRepository } from '@/domain/repositories';
 export class ListAllUseCase {
   constructor(private readonly listRepository: ListRepository) {}
 
-  async execute(): Promise<List[]> {
+  async execute(): Promise<List[] | null> {
     const lists = await this.listRepository.list();
     return lists;
   }
