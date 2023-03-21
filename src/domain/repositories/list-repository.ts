@@ -1,9 +1,15 @@
-import { List } from '@/domain/models';
+import { List, ListItem } from '@/domain/models';
+
+export type CreateListInput = {
+  name: string;
+  description?: string;
+  items: Omit<ListItem, 'id'>[];
+};
 
 export interface ListRepository {
-  createList(list: Omit<List, 'id' | 'createdAt' | 'updatedAt'>): Promise<void>;
+  createList(list: CreateListInput): Promise<void>;
   updateList(list: List): Promise<void>;
-  getListById(id: number): Promise<List | null>;
+  getListById(id: string): Promise<List | null>;
   list(): Promise<List[] | null>;
-  deleteListById(id: number): Promise<void>;
+  deleteListById(id: string): Promise<void>;
 }
