@@ -3,7 +3,7 @@ import { ListRepository } from '@/domain/repositories';
 export class DeleteListByIdUseCase {
   constructor(private readonly listRepository: ListRepository) {}
 
-  async execute(id: number): Promise<void> {
+  async execute(id: string): Promise<void> {
     const list = await this.listRepository.getListById(id);
 
     if (!list) {

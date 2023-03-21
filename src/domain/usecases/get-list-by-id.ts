@@ -4,7 +4,7 @@ import { List } from '@/domain/models';
 export class GetListByIdUseCase {
   constructor(private readonly listRepository: ListRepository) {}
 
-  async execute(id: number): Promise<List | null> {
+  async execute(id: string): Promise<List | null> {
     const list = await this.listRepository.getListById(id);
 
     if (!list) {

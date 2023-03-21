@@ -4,7 +4,7 @@ import { List } from '@/domain/models';
 export class UpdateListUseCase {
   constructor(private readonly listRepository: ListRepository) {}
 
-  async execute(listData: List): Promise<void> {
+  async execute(listData: Partial<List> & { id: string }): Promise<void> {
     const existingList = await this.listRepository.getListById(listData.id);
 
     if (!existingList) {

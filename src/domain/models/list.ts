@@ -1,5 +1,5 @@
 export type List = {
-  id: number;
+  id: string;
   name: string;
   description?: string;
   createdAt: string;
@@ -8,7 +8,7 @@ export type List = {
 };
 
 export type ListItem = {
-  id: number;
+  id: string;
   name: string;
   quantity?: number;
   completed: boolean;
