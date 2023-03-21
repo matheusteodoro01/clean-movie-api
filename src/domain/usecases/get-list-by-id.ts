@@ -1,5 +1,6 @@
 import { ListRepository } from '@/domain/repositories';
 import { List } from '@/domain/models';
+import { NotFoundError } from '@/domain/errors';
 
 export class GetListByIdUseCase {
   constructor(private readonly listRepository: ListRepository) {}
@@ -8,7 +9,7 @@ export class GetListByIdUseCase {
     const list = await this.listRepository.getListById(id);
 
     if (!list) {
-      throw new Error(`List with ID ${id} not found`);
+      throw new NotFoundError(`List with ID ${id} not found`);
     }
 
     return list;
