@@ -1,11 +1,13 @@
-import { List } from '@/domain/models';
-import { ListRepository } from '@/domain/repositories';
+import { Movie } from '@/domain/models';
+import { MovieRepository } from '@/domain/repositories';
 
-export class ListAllUseCase {
-  constructor(private readonly listRepository: ListRepository) {}
+export class MovieAllUseCase {
+  constructor(private readonly movieRepository: MovieRepository) {}
 
-  async execute(): Promise<List[] | null> {
-    const lists = await this.listRepository.list();
-    return lists;
+  async execute(
+    page?: number,
+  ): Promise<{ page: number; results: Movie[] } | null> {
+    const movies = await this.movieRepository.list({ page: page ?? 1 });
+    return movies;
   }
 }

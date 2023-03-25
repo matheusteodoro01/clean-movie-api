@@ -1,15 +1,13 @@
-import { List, ListItem } from '@/domain/models';
+import { Movie } from '@/domain/models';
 
-export type CreateListInput = {
-  name: string;
-  description?: string;
-  items: Omit<ListItem, 'id'>[];
-};
-
-export interface ListRepository {
-  createList(list: CreateListInput): Promise<void>;
-  updateList(list: List): Promise<void>;
-  getListById(id: string): Promise<List | null>;
-  list(): Promise<List[] | null>;
-  deleteListById(id: string): Promise<void>;
+export interface MovieRepository {
+  createMovie(input: Omit<Movie, 'id'>): Promise<Movie>;
+  updateMovie(input: Movie): Promise<void>;
+  getMovieById({ id }: { id: number }): Promise<Movie | null>;
+  list({
+    page,
+  }: {
+    page: number;
+  }): Promise<{ page: number; results: Movie[] } | null>;
+  deleteMovieById({ id }: { id: number }): Promise<void>;
 }
