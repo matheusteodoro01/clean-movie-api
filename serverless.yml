@@ -1,0 +1,29 @@
+service: list-service
+
+plugins:
+  - serverless-bundle
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+useDotenv: true
+
+custom:
+  serverless-offline:
+    httpPort: 3001
+    lambdaPort: 3000
+    noPrependStageInUrl: true
+  bundle:
+    externals:
+      - "@nestjs/common"
+      - "@nestjs/core"
+      - "@nestjs/platform-express"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: src/main/api/handler.handler
+    events:
+      - httpApi: "*"
