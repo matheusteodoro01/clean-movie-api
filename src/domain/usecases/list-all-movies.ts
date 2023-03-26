@@ -1,7 +1,7 @@
 import { Movie } from '@/domain/models';
 import { MovieRepository } from '@/domain/repositories';
 
-export class MovieAllUseCase {
+export class ListAllMoviesUseCase {
   constructor(private readonly movieRepository: MovieRepository) {}
 
   async execute(

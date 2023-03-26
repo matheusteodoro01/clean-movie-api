@@ -2,7 +2,7 @@ import {
   CreateMovieUseCase,
   DeleteMovieByIdUseCase,
   GetMovieByIdUseCase,
-  MovieAllUseCase,
+  ListAllMoviesUseCase,
   UpdateMovieUseCase,
 } from '@/domain/usecases';
 import {
@@ -32,7 +32,7 @@ export class MovieController {
     @Inject(domain.usecases.getMovie)
     private readonly getMovieUseCase: GetMovieByIdUseCase,
     @Inject(domain.usecases.listAll)
-    private readonly listAllUseCase: MovieAllUseCase,
+    private readonly listAllUseCase: ListAllMoviesUseCase,
     @Inject(domain.usecases.updateMovie)
     private readonly updateMovieUseCase: UpdateMovieUseCase,
     @Inject(domain.usecases.deleteMovie)

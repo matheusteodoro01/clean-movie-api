@@ -3,7 +3,7 @@ import {
   CreateMovieUseCase,
   DeleteMovieByIdUseCase,
   GetMovieByIdUseCase,
-  MovieAllUseCase,
+  ListAllMoviesUseCase,
   UpdateMovieUseCase,
 } from '@/domain/usecases';
 import { infra } from '@/infra/common/ioc';
@@ -27,7 +27,7 @@ import { MovieRepositoriesModule } from './movie-repositories.module';
     },
     {
       provide: domain.usecases.listAll,
-      useFactory: (listRepository) => new MovieAllUseCase(listRepository),
+      useFactory: (listRepository) => new ListAllMoviesUseCase(listRepository),
       inject: [infra.repositories.listRepository],
     },
     {
