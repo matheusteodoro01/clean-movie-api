@@ -11,6 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "strict": true,
+    "resolveJsonModule": true,
     "strictNullChecks": true,
     "incremental": true,
     "skipLibCheck": true,
