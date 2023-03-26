@@ -2,7 +2,7 @@ import * as z from 'zod';
 
 export const createMovieSchema = z.object({
   adult: z.boolean(),
-  budget: z.number(),
+  budget: z.number().optional(),
   genres: z.array(
     z.object({
       id: z.number(),
@@ -10,7 +10,7 @@ export const createMovieSchema = z.object({
     }),
   ),
   homepage: z.string(),
-  imdb_id: z.string(),
+  imdb_id: z.string().optional(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
@@ -42,7 +42,7 @@ export const createMovieSchema = z.object({
   ),
   status: z.string(),
   title: z.string(),
-  video: z.boolean(),
-  vote_average: z.number(),
-  vote_count: z.number(),
+  video: z.boolean().optional(),
+  vote_average: z.number().optional(),
+  vote_count: z.number().optional(),
 });

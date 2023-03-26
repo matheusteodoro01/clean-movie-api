@@ -1,9 +1,10 @@
 export interface Movie {
+  id: number;
   adult: boolean;
+  budget?: number;
   genres: Genre[];
   homepage: string;
-  id: number;
-  imdb_id: string;
+  imdb_id?: string;
   original_language: string;
   original_title: string;
   overview: string;
@@ -17,8 +18,8 @@ export interface Movie {
   spoken_languages: SpokenLanguage[];
   status: string;
   title: string;
-  vote_average: number;
-  vote_count: number;
+  vote_average?: number;
+  vote_count?: number;
 }
 
 type Genre = {
