@@ -1,6 +1,7 @@
 import { ExceptionFilter, Catch, ArgumentsHost, Logger } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
 import { getErrorStatusCode } from '@/infra/common';
+import { ZodError } from 'zod';
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
@@ -9,13 +10,15 @@ export class AllExceptionsFilter implements ExceptionFilter {
     private readonly logger: Logger,
   ) {}
 
-  catch(exception: Error, host: ArgumentsHost): void {
+  catch(exception: unknown, host: ArgumentsHost): void {
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
     const statusCode = getErrorStatusCode(exception);
     const message =
-      exception instanceof Error ? exception.message : 'Erro interno';
+      exception instanceof ZodError
+        ? JSON.parse(exception.message)
+        : 'Internal server error';
 
     exception instanceof Error
       ? this.logger.error(exception.message, JSON.stringify(exception.stack))

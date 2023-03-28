@@ -40,7 +40,7 @@ describe('Create movie controller', () => {
       .send({});
     expect(status).toBe(400);
     expect(body).toEqual({
-      message: expect.any(String),
+      message: expect.any(Array),
       statusCode: 400,
     });
   });

@@ -17,6 +17,12 @@ describe('ListAllMoviesUseCase', () => {
 
   it('should returns a valid movies', async () => {
     const { sut } = makeSut();
+    const result = await sut.execute(1);
+    expect(result).toEqual({ page: 1, results: [makeMovie] });
+  });
+
+  it('should returns a valid movies of page 1', async () => {
+    const { sut } = makeSut();
     const result = await sut.execute();
     expect(result).toEqual({ page: 1, results: [makeMovie] });
   });
