@@ -1,7 +1,7 @@
 import * as z from 'zod';
 
 export const updateMovieSchema = z.object({
-  id: z.number(),
+  id: z.preprocess(Number, z.number()),
   adult: z.boolean().optional(),
   budget: z.number().optional(),
   genres: z

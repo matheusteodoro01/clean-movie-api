@@ -53,23 +53,18 @@ export class MovieController {
 
   @Get(':id')
   async findOne(@Param('id') id: string) {
-    return await this.getMovieUseCase.execute(
-      getMovieSchema.parse({ id: Number(id) }),
-    );
+    return await this.getMovieUseCase.execute(getMovieSchema.parse({ id }));
   }
 
   @Put(':id')
   async update(@Param('id') id: string, @Body() data: any) {
     return await this.updateMovieUseCase.execute(
-      updateMovieSchema.parse({ ...data, id: Number(id) }),
+      updateMovieSchema.parse({ ...data, id }),
     );
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    console.log(id);
-    return this.deleteMovieUseCase.execute(
-      deleteMovieSchema.parse({ id: Number(id) }),
-    );
+    return this.deleteMovieUseCase.execute(deleteMovieSchema.parse({ id }));
   }
 }
