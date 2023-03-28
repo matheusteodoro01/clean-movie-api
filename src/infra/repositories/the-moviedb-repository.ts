@@ -57,7 +57,7 @@ export class MovieDBMovieRepository implements MovieRepository {
 
       return data;
     } catch (error: any) {
-      if (error?.response.status === 404) {
+      if (error.response.status === 404) {
         return null;
       }
       throw new Error(`Falha ao buscar filme ID ${id}`);
