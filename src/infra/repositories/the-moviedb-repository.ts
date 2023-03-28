@@ -5,6 +5,7 @@ import { MovieRepository } from '@/domain/repositories';
 export class MovieDBMovieRepository implements MovieRepository {
   private readonly httpClient: AxiosInstance;
   private pages: { [key: string]: Movie[] } = {};
+  private deletedMovies: number[] = [];
   private responseLanguage = 'pt-BR';
   private limit = 10;
 
@@ -40,6 +41,10 @@ export class MovieDBMovieRepository implements MovieRepository {
 
   async getMovieById({ id }: { id: number }): Promise<Movie | null> {
     try {
+      if (this.deletedMovies.find((movieDeletedId) => movieDeletedId === id)) {
+        return null;
+      }
+
       for (const pageMovies of Object.values(this.pages)) {
         const movie = pageMovies.find((movie) => movie.id === id);
         if (movie) {
@@ -72,7 +77,10 @@ export class MovieDBMovieRepository implements MovieRepository {
       );
 
       data.results.forEach((movie) => {
-        if (!this.pages[page].find((moviePage) => moviePage.id === movie.id)) {
+        if (
+          !this.pages[page].find((moviePage) => moviePage.id === movie.id) &&
+          !this.deletedMovies.find((id) => id === movie.id)
+        ) {
           this.addMovieOnPage(page, movie);
         }
       });
@@ -92,11 +100,13 @@ export class MovieDBMovieRepository implements MovieRepository {
         break;
       }
     }
+    this.deletedMovies.push(id);
     return Promise.resolve();
   }
 
   private addMovieOnPage(page: number, movie: Movie): void {
     !this.pages[page] && (this.pages[page] = []);
+
     if (this.pages[page].length < this.limit) {
       this.pages[page].push(movie);
     } else {
