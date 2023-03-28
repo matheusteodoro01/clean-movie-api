@@ -10,11 +10,10 @@ const config: Config.InitialOptions = {
   silent: true,
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
+    '!<rootDir>/src/domain/models/index.ts',
     '!<rootDir>/src/domain/repositories/index.ts',
     '!<rootDir>/src/infra/dto/**',
-    '!<rootDir>/src/infra/common/index.ts',
-    '!<rootDir>/src/main/ioc/*',
-    '!<rootDir>/src/main/bootstrap.ts',
+    '!<rootDir>/src/infra/common/**',
     '!<rootDir>/src/main/api/handler.ts',
   ],
   globalSetup: './integration.jest.setup.ts',
